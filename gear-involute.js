@@ -13,9 +13,9 @@
 var util = require('util');
 var fs   = require('fs');
 
-var OpenJSCAD = require('openjscad.js')
-var Gear      = require('gear.js')
-var GearSet   = require('gearset.js')
+var OpenJSCAD = require('./openjscad.js')
+var Gear      = require('./gear.js')
+var GearSet   = require('./gearset.js')
 
 var yargs = require('yargs')
     .usage('Usage: $0 -o [dxf filename]')

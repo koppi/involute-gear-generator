@@ -7,8 +7,8 @@
  * Copyright 2015 Jakob Flierl
  */
 
-var csg       = require('csg.js')
-var OpenJSCAD = require('openjscad.js')
+var csg       = require('./csg.js')
+var OpenJSCAD = require('./openjscad.js')
 
 var CSG = csg.CSG;
 var CAG = csg.CAG;

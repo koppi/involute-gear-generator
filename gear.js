@@ -7,7 +7,7 @@
  * Copyright 2015 Jakob Flierl
  */
 
-var csg = require('csg.js')
+var csg = require('./csg.js')
 
 var CSG = csg.CSG;
 var CAG = csg.CAG;

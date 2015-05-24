@@ -1,6 +1,6 @@
 {
     "name": "involute-gear-generator",
-    "version": "0.0.6",
+    "version": "0.0.8",
     "description": "involute gear generator",
     "bin" : "./gear-involute.js",
     "scripts": {

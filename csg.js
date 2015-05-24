@@ -6136,7 +6136,6 @@ CAG.PathsToDxf = function(paths) {
 		        str += "  0\nLINE\n  8\n0\n";
 			str += " 10\n" + p1.x + "\n 20\n" + p1.y + "\n";
 			str += " 11\n" + p2.x + "\n 21\n" + p2.y + "\n";
-                    console.log(p1.x);
 		}
             
 	});

@@ -6129,20 +6129,20 @@ CAG.PathsToDxf = function(paths) {
 	str += "  0\nSECTION\n  2\nBLOCKS\n";
 	str += "  0\nENDSEC\n";
 	str += "  0\nSECTION\n  2\nENTITIES\n";
-	paths.map(function(path) {
-		var numpoints_closed = path.points.length + (path.closed ? 0 : 0);
-//		var numpoints_closed = path.points.length + (path.closed ? 1 : 0); XXX
-		str += "  0\nLWPOLYLINE\n  8\n0\n  90\n" + numpoints_closed + "\n  70\n" + (path.closed ? 1 : 0) + "\n";
-		for(var pointindex = 0; pointindex < numpoints_closed; pointindex++) {
-			var pointindexwrapped = pointindex;
-			if(pointindexwrapped >= path.points.length) pointindexwrapped -= path.points.length;
-			var point = path.points[pointindexwrapped];
-			str += " 10\n" + point.x + "\n 20\n" + point.y + "\n 30\n0.0\n";
+        paths.map(function(path) {
+		for(var i = 0; i < path.points.length; i++) {
+			var p1 = path.points[i];
+                        var p2 = path.points[(i+1) % path.points.length];
+		        str += "  0\nLINE\n  8\n0\n";
+			str += " 10\n" + p1.x + "\n 20\n" + p1.y + "\n";
+			str += " 11\n" + p2.x + "\n 21\n" + p2.y + "\n";
+                    console.log(p1.x);
 		}
+            
 	});
 
     str += "  0\nENDSEC\n";
-
+    
     // Some importers (e.g. Inkscape) needs an OBJECTS section with a DICTIONARY entry
     str += "  0\n";
     str += "SECTION\n";

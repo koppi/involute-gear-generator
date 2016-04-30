@@ -10,7 +10,7 @@ $ npm install -g involute-gear-generator
 Usage: involute-gear-generator -o [dxf filename]
 
 Options:
-  -o, --output                save gears to dxf file                  [required]
+  -o, --output                save gears to dxf file                  [optional]
   --circularPitch             Circular pitch (distance from one face of a tooth
                               to the corresponding face of an adjacent tooth on
                               the same gear, measured along the pitch circle)

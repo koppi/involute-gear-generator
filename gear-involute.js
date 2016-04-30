@@ -18,8 +18,7 @@ var Gear      = require('./gear.js')
 var GearSet   = require('./gearset.js')
 
 var yargs = require('yargs')
-    .usage('Usage: $0 -o [dxf filename]')
-    .demand(['o'])
+    .usage('Usage: $0 -o [dxf filename of stdout if -o option omitted]')
     .alias('o', 'output')
     .nargs('o', 1)
     .describe('o', 'save gears to dxf file')
@@ -39,17 +38,21 @@ if (argv.h) {
     return yargs.showHelp()
 }
 
-if (!argv.o) {
-    return console.log("option: --output=filename missing. exiting.")
-}
-
 var build = main(argv);
 
-fs.writeFile(argv.output, build.shape.toDxf(), function(err) {
-    if (err) {
-        return console.log(err);
-    }
-});
+if (argv.o) {
+    fs.writeFile(argv.output, build.shape.toDxf(), function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+} else {
+    process.stdout.write(build.shape.toDxf(), function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+}
 
 console.log("info = " + util.inspect(build.msg, { showHidden: true, depth: null }));
 

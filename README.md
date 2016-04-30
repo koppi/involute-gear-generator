@@ -1,5 +1,7 @@
 ## install via npm
 
+[![Join the chat at https://gitter.im/koppi/involute-gear-generator](https://badges.gitter.im/koppi/involute-gear-generator.svg)](https://gitter.im/koppi/involute-gear-generator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ```bash
 $ npm install -g involute-gear-generator
 ```

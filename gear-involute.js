@@ -49,12 +49,12 @@ if (argv.o) {
 } else {
     process.stdout.write(build.shape.toDxf(), function(err) {
         if (err) {
-            return console.log(err);
+            return process.stderr.write(err);
         }
     });
 }
 
-console.log("info = " + util.inspect(build.msg, { showHidden: true, depth: null }));
+process.stderr.write("info = " + util.inspect(build.msg, { showHidden: true, depth: null }));
 
 // console.log(util.inspect(shape, { showHidden: true, depth: null }));
 

@@ -7,6 +7,9 @@
  * Copyright 2015 Jakob Flierl
  */
 
+
+var rack_teeth; // global var for # of rack teeth
+
 var csg = require('./csg.js')
 
 var CSG = csg.CSG;
@@ -24,7 +27,11 @@ var GearType = {
 
 function Gear(options) {
     var options = options || {};
+
+    this.rackTeeth = options.rackTeeth == null ? 41 : Math.floor(options.rackTeeth/2)+1;
     
+    rack_teeth = this.rackTeeth; //2  // ensures odd # 
+
     this.toothCount = options.toothCount == null ? 15 : options.toothCount;
     if (this.toothCount > 0) {
 	this.gearType = GearType.Regular;
@@ -36,6 +43,7 @@ function Gear(options) {
     else {
 	// this.toothCount  == 0
 	this.gearType = GearType.Rack;
+
     }					
     
     this.circularPitch = options.circularPitch;    // Distance from one face of a tooth to the corresponding face of an adjacent tooth on the same gear, measured along the pitch circle.
@@ -158,7 +166,8 @@ method._createRegularGearShape = function() {
     };
 }
 method._createSingleTooth = function() {
-    // create outer circle sector covering one tooth
+
+   // create outer circle sector covering one tooth
     var toothSectorPath = new CSG.Path2D([[0,0]], /* closed = */ false);
     var toothSectorArc = CSG.Path2D.arc({
 	center: [0, 0],
@@ -167,6 +176,7 @@ method._createSingleTooth = function() {
 	endangle: 90 - this.angleToothToTooth,
 	resolution: this.qualitySettings.resolution,
     });
+
     toothSectorPath = toothSectorPath.concat(toothSectorArc);
     toothSectorPath = toothSectorPath.close();
     var toothSector = toothSectorPath.innerToCAG();
@@ -211,6 +221,7 @@ method.createCutoutDemo = function() {
 method.createToothCutout = function(asPath) {
     var angleToothToTooth = 360 / this.toothCount;
     var angleStepSize = this.angleToothToTooth / this.qualitySettings.stepsPerToothAngle;
+
     //OpenJsCad.log("angleToothToTooth: " + this.angleToothToTooth);
     //OpenJsCad.log("angleStepSize: " + angleStepSize);
     var toothCutout = new CAG();
@@ -279,8 +290,8 @@ method.createToothCutter = function(asPath) {
     var cutterDepth = this.addendum + this.clearance;
     var cutterOutsideLength = 3 * this.addendum;
     msg.push({cutterDepth: cutterDepth});
-    msg.push({cutterOutsideLength: cutterOutsideLength});
-    
+
+
     var sinPressureAngle = Math.sin(this.pressureAngle * Math.PI / 180);
     var cosPressureAngle = Math.cos(this.pressureAngle * Math.PI / 180);
     
@@ -510,7 +521,7 @@ method._createRackShape = function() {
     var protoTooth = this._createRackTooth();
     
     // we draw one tooth in the middle and then five on either side
-    var toothCount = 41.0;
+    var toothCount = rack_teeth;
     for (var i = 0; i < toothCount; i++) {
 	var tooth = protoTooth.translate([0, (0.5 + -toothCount / 2 + i) * this.circularPitch]);
 	rack = rack.union(tooth);

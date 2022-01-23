@@ -34,6 +34,7 @@ Options:
                               : rack; n1 < 0: internal gear)       [default: 30]
   --wheel1CenterHoleDiamater  Wheel 1 Center Hole Diameter (0 for no hole)
                                                                     [default: 4]
+  --rackTeeth                 Number of desired teeth in rack       [default: 41]
   --wheel2ToothCount          Wheel 2 Tooth Count                   [default: 8]
   --wheel2CenterHoleDiamater  Wheel 2 Center Hole Diameter (0 for no hole)
                                                                     [default: 4]

@@ -64,6 +64,7 @@ function main(params)
     var qualitySettings = initializeQualitySettings(params.qualityOption)
     
     var gear1 = new Gear({
+    rackTeeth: params.rackTeeth,
 	circularPitch: params.circularPitch,
 	pressureAngle: params.pressureAngle,
 	clearance: params.clearance,
@@ -74,6 +75,8 @@ function main(params)
 	qualitySettings: qualitySettings
     });
     var gear2 = new Gear({
+
+    rackTeeth: params.rackTeeth,
 	circularPitch: params.circularPitch,
 	pressureAngle: params.pressureAngle,
 	clearance: params.clearance,
@@ -118,6 +121,7 @@ function initializeQualitySettings(qualityOption) {
 
 function getParameterDefinitions() {
     return [
+      { name: 'rackTeeth', caption: 'number of rack teeth, if n=0; will always be an odd number, i.e. 20 will result in 21 rack teeth.', type: 'int', initial: 41 },
 	{ name: 'circularPitch', caption: 'Circular pitch (distance from one face of a tooth to the corresponding face of an adjacent tooth on the same gear, measured along the pitch circle)', type: 'float', initial: 8 },
 	{ name: 'pressureAngle', caption: 'Pressure Angle (common values are 14.5, 20 and 25 degrees)', type: 'float', initial: 20 },
 	{ name: 'clearance', caption: 'Clearance (minimal distance between the apex of a tooth and the trough of the other gear; in length units)', type: 'float', initial: 0.05 },
